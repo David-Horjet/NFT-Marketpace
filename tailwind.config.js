@@ -4,8 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        bc: "#5142FC",
+        bc: "#4b50e6",
         bc2: "#14141F",
+        gray: "#343444",
         para: "#343434",
       },
       fontFamily: {

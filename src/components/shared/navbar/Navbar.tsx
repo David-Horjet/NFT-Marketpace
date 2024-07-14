@@ -5,11 +5,11 @@ import { BsList, BsX } from "react-icons/bs";
 import { ButtonBg, ButtonOutline } from "../buttons/Buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidenav } from "../../../features/unauth-features/ActionSlice";
-import { RootState } from "../../../types/Interface";
+import { NavbarProps, RootState } from "../../../types/Interface";
 import { FaSearch } from "react-icons/fa";
 import { IoWallet } from "react-icons/io5";
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
   const dispatch = useDispatch();
   const { sidenav } = useSelector((state: RootState) => state.action);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -57,11 +57,7 @@ const Navbar: React.FC = () => {
     },
     {
       text: "Explore",
-      link: "/#listings",
-    },
-    {
-      text: "Services",
-      link: "/#about",
+      link: "/#explore",
     },
     {
       text: "Community",
@@ -72,6 +68,15 @@ const Navbar: React.FC = () => {
       link: "/#faqs",
     },
   ];
+
+  function truncateAddress(address: string, chars = 4): string {
+    if (address.length <= chars * 2) {
+      return address;
+    }
+    const start = address.substring(0, chars);
+    const end = address.substring(address.length - chars, address.length);
+    return `${start}…${end}`;
+  }
 
   return (
     <>
@@ -98,15 +103,19 @@ const Navbar: React.FC = () => {
               ))}
             </ul>
           </section>
-          <section className="hidden md:flex items-center gap-4">
+          <section className="hidden md:flex items-center gap-10">
             <FaSearch className="text-white text-2xl" />
             <ButtonOutline
               className={`px-6 flex gap-2 py-3 ${scrollHeight > 50 ? "bg-bc2" : "border-bc"
                 }`}
-              onClick={() => navigate("/register")}
+              onClick={connectWallet}
             >
               <IoWallet />
-              Wallet Connect
+              {!walletAddress ? (
+                <span> Connect Wallet </span>
+              ) : (
+                <span> {truncateAddress(walletAddress)} </span>
+              )}
             </ButtonOutline>
           </section>
           <section className="md:hidden">
@@ -118,7 +127,7 @@ const Navbar: React.FC = () => {
         </section>
 
         <section
-          className={`fixed top-0 right-0 h-full p-4 w-full bg-bc text-white z-20 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed top-0 right-0 h-full p-4 w-full bg-bc2 text-white z-20 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
             }`}
         >
           <section className="absolute top-6 right-6 z-30">
@@ -141,16 +150,18 @@ const Navbar: React.FC = () => {
                 </RouterLink>
               </li>
             ))}
-            <ButtonBg
-              className={`px-6 py-3 mt-4 text-bc ${scrollHeight > 50 ? "bg-white" : "bg-white"
+            <ButtonOutline
+              className={`px-6 flex gap-2 py-3 ${scrollHeight > 50 ? "bg-bc2" : "border-bc"
                 }`}
-              onClick={() => {
-                navigate("/register");
-                onToggle(); // Close sidebar when button is clicked
-              }}
+              onClick={connectWallet}
             >
-              Get Started
-            </ButtonBg>
+              <IoWallet />
+              {!walletAddress ? (
+                <span> Connect Wallet </span>
+              ) : (
+                <span> {truncateAddress(walletAddress)} </span>
+              )}
+            </ButtonOutline>
           </ul>
         </section>
       </header>

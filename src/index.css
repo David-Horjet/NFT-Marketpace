@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Plus";
-  src: local("Plus"),
-    url("./assets/fonts/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf")
+  font-family: "Urbanist";
+  src: local("Urbanist"),
+    url("./assets/fonts/Urbanist/Urbanist-Italic-VariableFont_wght.ttf")
       format("truetype");
 }
 
 .linear-gradient {
-    background-image: linear-gradient(142deg, #1c4cd0 0%, #761cd0 100%);
-    background-size: 100% auto;
+  background-image: linear-gradient(142deg, #1c4cd0 0%, #761cd0 100%);
+  background-size: 100% auto;
+}
+
+.text-clip {
+  color: #14141f;
+  background: linear-gradient(-45deg, #e250e5, #4b50e6, #e250e5, #4b50e6);
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 3px transparent;
 }

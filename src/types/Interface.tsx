@@ -1,13 +1,15 @@
+import { Key } from "react";
+
 export interface ButtonProps {
-  children: string;
-  onClick: () => void;
+  children: React.ReactNode;
+  onClick: any;
   disabled?: boolean;
   className?: string;
   bgColor?: string;
 }
 
 export interface InputProps {
-  label: string;
+  label?: string;
   handleChange: () => void;
   type?: string;
   placeholder?: string;
@@ -28,23 +30,27 @@ export interface RootState {
   };
 }
 
-export interface ListingProps {
-  propList: {
+export interface NavbarProps {
+  walletAddress: string,
+  connectWallet: string
+}
+
+export interface NftProps {
+  id: Key | null | undefined;
+  onPurchaseClick: () => void;
+  nft: {
     displayImage: string,
-    listingType: string,
-    amount: string,
-    rentalPeriod: string,
-    propertyName: string,
-    location: string,
-    bedrooms: number,
-    bathrooms: number,
-    sqFt: number,
-    garage: number,
-    agentInCharge: {
-      title: string,
+    author: {
       firstName: string,
       profilePic: string
     },
-    postedDate: string
+  };
+}
+
+export interface SellerProps {
+  seller: {
+      amount: string,
+      fullName: string,
+      profilePic: string
   };
 }
