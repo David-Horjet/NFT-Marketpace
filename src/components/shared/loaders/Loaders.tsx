@@ -7,8 +7,8 @@ export const ProgressBarLoader: React.FC = () => {
             visible={true}
             height="60"
             width="100"
-            barColor="#0000BF"
-            borderColor="#0000BF"
+            barColor="#4b50e6"
+            borderColor="#4b50e6"
             ariaLabel="progress-bar-loading"
             wrapperStyle={{}}
             wrapperClass=""

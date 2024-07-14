@@ -1,4 +1,3 @@
-import { Key } from "react";
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -32,20 +31,20 @@ export interface RootState {
 
 export interface NavbarProps {
   walletAddress: string,
-  connectWallet: string
+  connectWallet: () => void;
 }
 
+// Update your NftProps type to include required properties
+// Update your NftProps type to include required properties
 export interface NftProps {
-  id: Key | null | undefined;
+  id: string;
+  nft: any; 
   onPurchaseClick: () => void;
-  nft: {
-    displayImage: string,
-    author: {
-      firstName: string,
-      profilePic: string
-    },
-  };
+  pubkey: string;
+  metadataAddress: string;
 }
+
+
 
 export interface SellerProps {
   seller: {

@@ -3,7 +3,7 @@ import Navbar from "../../shared/navbar/Navbar";
 import React from "react";
 import { NavbarProps } from "../../../types/Interface";
 
-const MainLayout:React<NavbarProps> = ({ walletAddress, connectWallet }) => {
+const MainLayout: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
   const outlet = useOutlet();
   const location = useLocation();
   const currentRoute = location.pathname;

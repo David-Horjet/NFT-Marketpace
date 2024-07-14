@@ -1,7 +1,5 @@
 import React from 'react'
 import { NftProps } from '../../../../types/Interface'
-import { IoCalendarOutline } from 'react-icons/io5'
-import { GrAnchor } from 'react-icons/gr'
 import { FaRegHeart } from 'react-icons/fa'
 
 const NftColl: React.FC<NftProps> = ({ nft }) => {

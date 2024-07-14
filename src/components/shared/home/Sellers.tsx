@@ -1,11 +1,7 @@
 import React from 'react'
-import { ButtonBg } from '../buttons/Buttons';
-import { useNavigate } from 'react-router-dom';
-import NftItem from '../common/nftItem/NftItem';
 import SellerItem from '../common/sellerItem/SellerItem';
 
 const Sellers: React.FC = () => {
-    const navigate = useNavigate();
     const sellers = [
         {
             fullName: "Perry Rackat",

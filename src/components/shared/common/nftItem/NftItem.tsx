@@ -1,20 +1,25 @@
 import React from 'react';
 import { FaRegHeart } from 'react-icons/fa';
-import { GrAnchor } from 'react-icons/gr';
+import { NftProps } from '../../../../types/Interface';
 
-const NftItem: React.FC<{ nft: any, onPurchaseClick: () => void }> = ({ nft, onPurchaseClick }) => {
+const NftItem: React.FC<NftProps> = ({ nft, onPurchaseClick }) => {
     return (
-        <section className='shadow-xl rounded-3xl bg-gray p-5'>
+        <section className='shadow-xl rounded-3xl bg-gray p-5 relative group'>
             <section className='relative'>
                 <section className='z-10 absolute left-3 top-3 bg-[#14141F] text-white flex items-center gap-1 px-3 py-2 text-sm rounded-xl'>
                     <FaRegHeart /> <span>34</span>
                 </section>
-                <section className=' text-white text-xl absolute inset-x-0 bottom-2 left-10 right-10 font-bold tracking-wider bg-gray px-2 py-2 rounded-xl flex items-center gap-2'>
-                    <GrAnchor className="text-bc" /><span className='text-white text-base'>2 : 12 : 46 : 18</span>
-                </section>
+                {/* <section className=' text-white text-center text-sm absolute inset-x-0 bottom-2 left-10 right-10 font-bold tracking-wider bg-gray px-2 py-2 rounded-xl items-center gap-2'>
+                    Purchase
+                </section> */}
                 <section className='absolute inset-0 bg-black opacity-20 rounded-xl'></section>
                 <img className='h-[250px] w-full object-cover rounded-xl' src={nft.displayImage} alt={nft.displayImage} />
-                
+                <button
+                    onClick={onPurchaseClick}
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+                >
+                    <span className="bg-bc text-center text-white px-4 py-2 rounded-lg">Purchase</span>
+                </button>
             </section>
             <section className='px-0 pt-3 text-sm text-para'>
                 <section className="flex items-center justify-between mb-3">

@@ -12,8 +12,10 @@ const Hero = () => {
       <section className="w-full md:flex h-[100vh] bg-image-container bg-fixed items-center pt-28 md:pt-0 md:justify-center">
         <section className="w-full md:w-1/2">
           <h1
+            data-aos="fade-up"
             className="md:text-left text-center mb-5 text-white md:text-[45px] text-[32px] font-bold capitalize" >Discover, find, <br /><span className="text-clip">Sell extra ordinary</span> Monster NFTs</h1>
           <p
+            data-aos="fade-up"
             className="md:text-left text-center mb-5 text-neutral-300 text-[16px] md:text-xl md:leading-9">Marketplace for monster character cllections non fungible token NFTs</p>
           <section className="flex gap-4 justify-center md:justify-start">
             <section className="fit">
@@ -24,7 +26,8 @@ const Hero = () => {
                 <span>Explore</span>
               </ButtonOutline>
             </section>
-            <section className="fit">
+            <section
+              data-aos="fade-up" className="fit">
               <ButtonOutline className="px-6 gap-2 py-3" onClick={function (): void {
                 throw new Error("Function not implemented.")
               }}>
@@ -35,7 +38,8 @@ const Hero = () => {
           </section>
         </section>
         <section className="w-full md:w-1/2">
-          <img src={heroImg} alt="" /></section>
+          <img
+            data-aos="fade-left" src={heroImg} alt="" /></section>
       </section>
     </section>
   )

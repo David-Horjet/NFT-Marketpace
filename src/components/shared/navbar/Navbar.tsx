@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../common/logo/Logo";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { BsList, BsX } from "react-icons/bs";
-import { ButtonBg, ButtonOutline } from "../buttons/Buttons";
+import { ButtonOutline } from "../buttons/Buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidenav } from "../../../features/unauth-features/ActionSlice";
 import { NavbarProps, RootState } from "../../../types/Interface";
@@ -14,7 +14,6 @@ const Navbar: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
   const { sidenav } = useSelector((state: RootState) => state.action);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [scrollHeight, setScrollHeight] = useState(0);
-  const navigate = useNavigate();
 
   const onToggle = () => {
     dispatch(toggleSidenav(!sidenav));

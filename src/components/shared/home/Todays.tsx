@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonBg, ButtonOutline, ButtonOutlineWhite } from '../buttons/Buttons';
+import { ButtonOutlineWhite } from '../buttons/Buttons';
 import { useNavigate } from 'react-router-dom';
 import NftItem from '../common/nftItem/NftItem';
 import { TbCategory2 } from 'react-icons/tb';
@@ -29,8 +29,8 @@ const Todays: React.FC = () => {
                 </section>
                 <section className="w-fit">
                     <ButtonOutlineWhite
-                        onClick={() => navigate("/register")} className='px-5 py-2 flex items-center gap-1'><IoPricetags 
-                        className='text-white' />Price Range
+                        onClick={() => navigate("/register")} className='px-5 py-2 flex items-center gap-1'><IoPricetags
+                            className='text-white' />Price Range
                     </ButtonOutlineWhite>
                 </section>
                 <section className="w-fit">
@@ -47,9 +47,12 @@ const Todays: React.FC = () => {
             <section className="w-100 py-10">
                 <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                     {nfts.map((nft) => (
-                        <NftItem nft={nft} onPurchaseClick={function (): void {
-                            throw new Error('Function not implemented.');
-                        } } />
+                        <NftItem
+                            key={nft.id}
+                            nft={nft}
+                            id={"1"} pubkey={''} metadataAddress={''} onPurchaseClick={function (): void {
+                                throw new Error('Function not implemented.');
+                            }} />
                     ))}
                 </section>
             </section>

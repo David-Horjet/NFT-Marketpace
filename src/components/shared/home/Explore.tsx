@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ButtonBg } from '../buttons/Buttons';
 import { useNavigate } from 'react-router-dom';
 import NftItem from '../common/nftItem/NftItem';
 import PurchaseModal from '../common/nftItem/PurchaseModal';
 import { NftProps } from '../../../types/Interface';
 import { nfts } from '../../../utils/DummyData';
+// import { fetchNFTs } from '../../../api/Api';
 
 const Explore: React.FC = () => {
     const navigate = useNavigate();
@@ -12,10 +13,26 @@ const Explore: React.FC = () => {
     const [selectedNft, setSelectedNft] = useState<NftProps | null>(null);
     const [showModal, setShowModal] = useState(false);
 
-    const handlePurchaseClick = (nft: NftProps) => {
-        setSelectedNft(nft);
-        setShowModal(true);
-    };
+    console.log(nfts);
+
+
+    // useEffect(() => {
+    //     const loadNFTs = async () => {
+    //         try {
+    //             const fetchedNfts = await fetchNFTs();
+    //             setNfts(fetchedNfts);
+    //         } catch (error) {
+    //             console.error("Failed to fetch NFTs", error);
+    //         }
+    //     };
+
+    //     loadNFTs();
+    // }, []);
+
+    // const handlePurchaseClick = (nft: NftProps) => {
+    //     setSelectedNft(nft);
+    //     setShowModal(true);
+    // };
 
     const handleModalClose = () => {
         setShowModal(false);
@@ -39,8 +56,9 @@ const Explore: React.FC = () => {
                         <NftItem
                             key={nft.id}
                             nft={nft}
-                            onPurchaseClick={() => handlePurchaseClick(nft)}
-                        />
+                            id={"1"} pubkey={''} metadataAddress={''} onPurchaseClick={function (): void {
+                                throw new Error('Function not implemented.');
+                            } } />
                     ))}
                 </section>
             </section>

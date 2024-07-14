@@ -9,11 +9,17 @@ import Home from "./pages/home/Home";
 import { ProgressBarLoader } from "./components/shared/loaders/Loaders";
 import { useEffect, useState } from "react";
 import MainLayout from "./components/layouts/mainlayout/MainLayout";
-import idl from './idl.json'
+// import idl from './idl.json'
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true); // State to track loading status
 
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
   useEffect(() => {
     // Simulate loading delay for demonstration purposes
     const timer = setTimeout(() => {
@@ -25,7 +31,7 @@ const App = () => {
   }, []);
 
   const [walletAddress, setWalletAdresss] = useState("");
-  const [Loading, setLoading] = useState(false)
+  const [, setLoading] = useState(false)
 
   useEffect(() => {
     const onLoad = () => {
@@ -39,10 +45,10 @@ const App = () => {
     interface WindowWithSolana extends Window {
       solana: any; // Adjust 'any' to the specific type of 'solana'
     }
-    
+
     // Type assertion
     const { solana } = window as unknown as WindowWithSolana;
-    
+
     try {
       setLoading(true)
       if (solana) {
@@ -66,7 +72,7 @@ const App = () => {
     interface WindowWithSolana extends Window {
       solana: any; // Adjust 'any' to the specific type of 'solana'
     }
-    
+
     // Type assertion
     const { solana } = window as unknown as WindowWithSolana;
     try {
@@ -88,7 +94,7 @@ const App = () => {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <section className="relative h-screen bg-#ededff w-full flex flex-col justify-center items-center">
+        <section className="relative h-screen bg-bc2 w-full flex flex-col justify-center items-center">
           <section className="w-36">
           </section>
           <section><ProgressBarLoader /></section>
