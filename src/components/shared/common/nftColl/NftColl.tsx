@@ -8,11 +8,11 @@ const NftColl: React.FC<NftProps> = ({ nft }) => {
             <section className="flex justify-between mb-4">
                 <section className="flex gap-2 items-center">
                     <section className="w-[45px] h-[45px] rounded-3xl">
-                        <img className="w-full rounded-lg" src={nft.agentInCharge.profilePic} alt="" />
+                        <img className="w-full rounded-lg" src={nft.author.profilePic} alt="" />
                     </section>
                     <section className="flex flex-col text-left">
                         <span className='text-white text-lg font-bold'>Creative Art Colection</span>
-                        <span className='text-neutral-400 font-semibold text-base'>created by {nft.agentInCharge.firstName}</span>
+                        <span className='text-neutral-400 font-semibold text-base'>created by {nft.author.firstName}</span>
                     </section>
                 </section>
                 <section className="flex items-center gap-2">
