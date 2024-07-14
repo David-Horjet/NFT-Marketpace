@@ -1,30 +1,137 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Anchor NFT Marketplace UI
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a fully functional Marketplace UI connected to a Solana-based Marketplace smart contract. The UI allows users to view and interact with NFT listings, including purchasing items. The project is designed to be deployed on Cloudflare or Vercel for easy access and testing.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Engaging and user-friendly marketplace interface
+- Integration with Solana blockchain and Marketplace smart contract
+- Responsive design for both desktop and mobile devices
+- Interactive NFT listings with purchase functionality
+- Hover effects and animations for a dynamic user experience
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- React.js
+- TypeScript
+- Tailwind CSS
+- Solana Web3.js
+- Anchor framework
+
+## Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- Yarn or npm
+- Solana CLI
+- Anchor CLI
+
+### Installation
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/your-username/marketplace-ui.git
+cd marketplace-ui
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. **Install dependencies:**
+
+Using Yarn:
+
+```bash
+yarn install
+```
+
+Or using npm:
+
+```bash
+npm install
+```
+
+3. **Set up Solana and Anchor:**
+
+Ensure you have the Solana CLI installed:
+
+```bash
+solana --version
+```
+
+If not, install it:
+
+```bash
+sh -c "$(curl -sSfL https://release.solana.com/v1.8.0/install)"
+```
+
+Set the Solana cluster to Devnet:
+
+```bash
+solana config set --url https://api.devnet.solana.com
+```
+
+Ensure you have the Anchor CLI installed:
+
+```bash
+anchor --version
+```
+
+If not, install it:
+
+```bash
+cargo install --git https://github.com/project-serum/anchor --tag v0.29.0 anchor-cli --locked
+```
+
+4. **Configure Environment Variables:**
+
+Create a `.env` file in the root of the project and add the following environment variables:
+
+```plaintext
+REACT_APP_SOLANA_NETWORK=devnet
+REACT_APP_PROGRAM_ID=<Your_Program_ID>
+REACT_APP_IDL_PATH=./target/idl/your_program.json
+```
+
+Replace `<Your_Program_ID>` with the actual program ID of your smart contract.
+
+### Running the Application
+
+1. **Start the development server:**
+
+Using Yarn:
+
+```bash
+yarn start
+```
+
+Or using npm:
+
+```bash
+npm start
+```
+
+The app should now be running on `http://localhost:3000`.
+
+### Building for Production
+
+To create an optimized production build, run:
+
+Using Yarn:
+
+```bash
+yarn build
+```
+
+Or using npm:
+
+```bash
+npm run build
+```
+
+The production-ready build will be in the `build` directory.
+
