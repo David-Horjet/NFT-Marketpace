@@ -59,12 +59,12 @@ const Navbar: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
       link: "/#explore",
     },
     {
-      text: "Community",
-      link: "/#features",
+      text: "Collections",
+      link: "/#collections",
     },
     {
-      text: "Contact",
-      link: "/#faqs",
+      text: "Subscribe",
+      link: "/#subscribe",
     },
   ];
 

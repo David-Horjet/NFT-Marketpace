@@ -7,7 +7,7 @@ import { nfts } from '../../../utils/DummyData';
 const Collection: React.FC = () => {
     const navigate = useNavigate();
     return (
-        <section id='explore' className='bg-bc2 md:px-10 px-4 py-20'>
+        <section id='collection' className='bg-bc2 md:px-10 px-4 py-20'>
             <section className="w-full flex items-center justify-between">
                 <span className="capitalize text-white text-2xl md:text-4xl">
                     Popular Collection
