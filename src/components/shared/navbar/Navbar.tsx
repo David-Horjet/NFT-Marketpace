@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Logo from "../common/logo/Logo";
 import { Link as RouterLink } from "react-router-dom";
 import { BsList, BsX } from "react-icons/bs";
@@ -8,8 +8,16 @@ import { toggleSidenav } from "../../../features/unauth-features/ActionSlice";
 import { NavbarProps, RootState } from "../../../types/Interface";
 import { FaSearch } from "react-icons/fa";
 import { IoWallet } from "react-icons/io5";
+import {
+  WalletModalProvider,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
+import { WalletProvider } from "@solana/wallet-adapter-react";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 
-const Navbar: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
+const Navbar: React.FC<NavbarProps> = (
+  { walletAddress, connectWallet }
+) => {
   const dispatch = useDispatch();
   const { sidenav } = useSelector((state: RootState) => state.action);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -68,6 +76,18 @@ const Navbar: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
     },
   ];
 
+  const network = WalletAdapterNetwork.Devnet;
+
+  
+
+  const wallets = useMemo(
+    () => [
+      // if desired, manually define specific/custom wallets here (normally not required)
+      // otherwise, the wallet-adapter will auto detect the wallets a user's browser has available
+    ],
+    [network],
+  );
+
   function truncateAddress(address: string, chars = 4): string {
     if (address.length <= chars * 2) {
       return address;
@@ -111,9 +131,9 @@ const Navbar: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
             >
               <IoWallet />
               {!walletAddress ? (
-                <span> Connect Wallet </span>
-              ) : (
-                <span> {truncateAddress(walletAddress)} </span>
+              <span> Connect Wallet </span>
+              ) : ( 
+              <span> {truncateAddress(walletAddress)} </span>
               )}
             </ButtonOutline>
           </section>
@@ -152,14 +172,14 @@ const Navbar: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
             <ButtonOutline
               className={`px-6 flex gap-2 py-3 ${scrollHeight > 50 ? "bg-bc2" : "border-bc"
                 }`}
-              onClick={connectWallet}
+              onClick={undefined}
             >
               <IoWallet />
-              {!walletAddress ? (
-                <span> Connect Wallet </span>
-              ) : (
-                <span> {truncateAddress(walletAddress)} </span>
-              )}
+              {/* {!walletAddress ? ( */}
+              <span> Connect Wallet </span>
+              {/* // ) : ( */}
+              {/* // <span> {truncateAddress(walletAddress)} </span> */}
+              {/* // )} */}
             </ButtonOutline>
           </ul>
         </section>

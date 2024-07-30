@@ -3,7 +3,9 @@ import Navbar from "../../shared/navbar/Navbar";
 import React from "react";
 import { NavbarProps } from "../../../types/Interface";
 
-const MainLayout: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => {
+const MainLayout: React.FC<NavbarProps> = (
+  { walletAddress, connectWallet }
+) => {
   const outlet = useOutlet();
   const location = useLocation();
   const currentRoute = location.pathname;
@@ -13,7 +15,9 @@ const MainLayout: React.FC<NavbarProps> = ({ walletAddress, connectWallet }) => 
     <>
       <section className="overflow-x-hidden p-0 w-full flex">
         <section className="w-full flex">
-          <Navbar walletAddress={walletAddress} connectWallet={connectWallet} />
+          <Navbar
+            walletAddress={walletAddress} connectWallet={connectWallet}
+          />
           {outlet}
         </section>
       </section>

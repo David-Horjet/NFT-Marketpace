@@ -19,8 +19,8 @@ const Collection: React.FC = () => {
             </section>
             <section className="w-100 py-10">
                 <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {nfts.map((nft) => (
-                        <NftColl nft={nft} id={''} onPurchaseClick={function (): void {
+                    {nfts.map((nft, i) => (
+                        <NftColl key={i} nft={nft} id={''} onPurchaseClick={function (): void {
                             throw new Error('Function not implemented.');
                         }} pubkey={''} metadataAddress={''} />
                     ))}

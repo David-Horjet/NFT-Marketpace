@@ -49,8 +49,8 @@ const Create = () => {
       </section>
       <section className="w-100 py-20">
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {featuresData.map((item) => (
-            <section className="relative bg-[#191926] rounded-2xl py-8 md:px-5 px-5">
+          {featuresData.map((item, i) => (
+            <section key={i} className="relative bg-[#191926] rounded-2xl py-8 md:px-5 px-5">
               <section className="absolute -top-4 -right-4 flex justify-center mb-5">
                 <img className="w-16" src={item?.icon} alt={item?.icon} />
               </section>

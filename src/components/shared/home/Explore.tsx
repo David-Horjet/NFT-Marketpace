@@ -1,38 +1,47 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ButtonBg } from '../buttons/Buttons';
-import { useNavigate } from 'react-router-dom';
-import NftItem from '../common/nftItem/NftItem';
 import PurchaseModal from '../common/nftItem/PurchaseModal';
 import { NftProps } from '../../../types/Interface';
-import { nfts } from '../../../utils/DummyData';
-// import { fetchNFTs } from '../../../api/Api';
+import { useConnection } from "@solana/wallet-adapter-react";
+import { program, counterPDA, MarketplaceData } from "../../../anchor/setup";
 
-const Explore: React.FC = () => {
-    const navigate = useNavigate();
-    // const [nfts, setNfts] = useState<NftProps[]>([]);
+const Explore = () => {
+    const { connection } = useConnection();
+    const [nfts, setNfts] = useState<MarketplaceData | null>(null);
     const [selectedNft, setSelectedNft] = useState<NftProps | null>(null);
     const [showModal, setShowModal] = useState(false);
 
     console.log(nfts);
+    
 
+    useEffect(() => {
+        if (!connection) {
+            console.error('Connection is not ready');
+            return;
+        }
 
-    // useEffect(() => {
-    //     const loadNFTs = async () => {
-    //         try {
-    //             const fetchedNfts = await fetchNFTs();
-    //             setNfts(fetchedNfts);
-    //         } catch (error) {
-    //             console.error("Failed to fetch NFTs", error);
-    //         }
-    //     };
+        // Fetch initial account data
+        program.account.marketplace.fetch(counterPDA).then((data: MarketplaceData) => {
+            setNfts(data);
+        });
 
-    //     loadNFTs();
-    // }, []);
+        // Subscribe to account change
+        const subscriptionId = connection.onAccountChange(
+            // The address of the account we want to watch
+            counterPDA,
+            // callback for when the account changes
+            accountInfo => {
+                const updatedData = program.coder.accounts.decode<MarketplaceData>("marketplace", accountInfo.data);
+                setNfts(updatedData);
+            },
+        );
 
-    // const handlePurchaseClick = (nft: NftProps) => {
-    //     setSelectedNft(nft);
-    //     setShowModal(true);
-    // };
+        return () => {
+            // Unsubscribe from account change
+            connection.removeAccountChangeListener(subscriptionId);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [connection]);
 
     const handleModalClose = () => {
         setShowModal(false);
@@ -45,27 +54,34 @@ const Explore: React.FC = () => {
                 <span className="capitalize text-white text-2xl md:text-4xl font-medium">
                     Live Auctions
                 </span>
-                <span
-                    className="uppercase text-bc text-sm md:text-base font-medium"
-                >EXPLORE MORE
+                <span className="uppercase text-bc text-sm md:text-base font-medium">
+                    EXPLORE MORE
                 </span>
             </section>
-            <section className="w-100 py-10">
-                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                    {nfts.map((nft) => (
-                        <NftItem
-                            key={nft.id}
-                            nft={nft}
-                            id={"1"} pubkey={''} metadataAddress={''} onPurchaseClick={function (): void {
-                                throw new Error('Function not implemented.');
-                            } } />
-                    ))}
-                </section>
-            </section>
+            {/* <section className="w-100 py-10">
+                {
+                    nfts ? (
+                        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                            {nfts.map((nft) => (
+                                <NftItem
+                                    key={nft.mint.toString()}
+                                    nft={nft}
+                                    id={nft.mint.toString()}
+                                    pubkey={nft.mint.toString()}
+                                    metadataAddress={nft.mint.toString()}
+                                    onPurchaseClick={() => handlePurchaseClick(nft)}
+                                />
+                            ))}
+                        </section>
+                    ) : (
+                        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"></section>
+                    )
+                }
+            </section> */}
             <section className="w-full flex justify-center">
                 <section className="w-fit">
-                    <ButtonBg
-                        onClick={() => navigate("/register")} className=' bg-bc px-10 py-4'>Explore More
+                    <ButtonBg className='bg-bc px-10 py-4' onClick={undefined}>
+                        Explore More
                     </ButtonBg>
                 </section>
             </section>

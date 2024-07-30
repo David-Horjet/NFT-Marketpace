@@ -7,11 +7,15 @@ import {
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/home/Home";
 import { ProgressBarLoader } from "./components/shared/loaders/Loaders";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MainLayout from "./components/layouts/mainlayout/MainLayout";
 // import idl from './idl.json'
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { clusterApiUrl } from "@solana/web3.js";
+import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
+import { WalletModalProvider, WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true); // State to track loading status
@@ -90,6 +94,18 @@ const App = () => {
     }
   };
 
+  // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
+  const network = WalletAdapterNetwork.Devnet;
+  // You can also provide a custom RPC endpoint.
+  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+  const wallets = useMemo(
+    () => [
+      // Add specific wallets here if needed
+    ],
+    [network]
+  );
+
   // Render loading spinner or content based on the loading state
   const renderContent = () => {
     if (isLoading) {
@@ -102,10 +118,17 @@ const App = () => {
       );
     } else {
       return (
-        <section className="App text-Urbanist">
-          <RouterProvider router={router} />
-          <ToastContainer />
-        </section>
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletModalProvider>
+              <section className="App text-Urbanist">
+                {/* Your RouterProvider and other components */}
+                <RouterProvider router={router} />
+                <ToastContainer />
+              </section>
+            </WalletModalProvider>
+          </WalletProvider>
+        </ConnectionProvider>
       );
     }
   };
@@ -113,7 +136,9 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route element={<MainLayout walletAddress={walletAddress} connectWallet={connectWallet} />}>
+        <Route element={<MainLayout
+        walletAddress={walletAddress} connectWallet={connectWallet}
+        />}>
           <Route path="/" element={<Home />} />
         </Route>
         {/* <Route path="/register" element={<Register />} />
